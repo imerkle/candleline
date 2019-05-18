@@ -48,6 +48,7 @@ class _ColumnarViewPainter extends CustomPainter {
     if (max == null ) {
       return;
     }
+    double width = size.width;
     double height = size.height - 20;
 
     final double heightNormalizer = height / (max);
@@ -58,10 +59,11 @@ class _ColumnarViewPainter extends CustomPainter {
     double rectBottom;
 
     Paint rectPaint;
-
+    
+    double rightGap = width - ( (data.length * rectWidth) - lineWidth / 2);
     for (int i = 0; i < data.length; i++) {
-      rectLeft = (i * rectWidth) + lineWidth / 2;
-      rectRight = ((i + 1) * rectWidth) - lineWidth / 2;
+      rectLeft = ((i * rectWidth) + lineWidth / 2) + rightGap;
+      rectRight = (((i + 1) * rectWidth) - lineWidth / 2) + rightGap;
 
       if (data[i].open > data[i].close) {
         rectPaint = new Paint()

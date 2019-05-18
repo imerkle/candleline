@@ -79,21 +79,11 @@ class _SeparateViewPainter extends CustomPainter {
 
   drawPriceLine(Canvas canvas, Size size) {
     double height = size.height - 20;
-    double width = size.width;
 
     Paint linePaint = Paint()
       ..color = lineColor
       ..strokeWidth = lineWidth;
 
-    //Horizontal Line
-    double heightOffset = height / 4;
-    /*
-    canvas.drawLine(Offset(0, 20), Offset(width, 20), linePaint);
-    canvas.drawLine(Offset(0, heightOffset + 20), Offset(width, heightOffset + 20), linePaint);
-    canvas.drawLine(Offset(0, heightOffset * 2 + 20), Offset(width, heightOffset * 2 + 20), linePaint);
-    canvas.drawLine(Offset(0, heightOffset * 3 + 20), Offset(width, heightOffset * 3 + 20), linePaint);
-    canvas.drawLine(Offset(0, height - 1 + 20), Offset(width, height - 1 + 20), linePaint);
-    */
 
     int count = (data.length ~/ 4).toInt() + 1;
 
@@ -101,15 +91,7 @@ class _SeparateViewPainter extends CustomPainter {
     for (var i = 1; i < 4; i++) {
           canvas.drawLine(Offset((i * count + 0.5) * rectWidth ,0), Offset((i * count + 0.5) * rectWidth,height + 20), linePaint);
     }
-    /*
-    double priceOffset = (max - min) / 4;
-    double origin = width - max.toStringAsPrecision(7).length * 6;
-    drawText(canvas, Offset(origin, 20), max.toStringAsPrecision(7));
-    drawText(canvas, Offset(origin, heightOffset -12 + 20), (min + priceOffset * 3).toStringAsPrecision(7));
-    drawText(canvas, Offset(origin, heightOffset * 2 - 12 + 20), (min + priceOffset * 2).toStringAsPrecision(7));
-    drawText(canvas, Offset(origin, heightOffset * 3 - 12 + 20), (min + priceOffset).toStringAsPrecision(7));
-    drawText(canvas, Offset(origin, height - 12 + 20), min.toStringAsPrecision(7));
-    */
+
   }
 
   drawVolumeLine(Canvas canvas, Size size) {
@@ -132,7 +114,6 @@ class _SeparateViewPainter extends CustomPainter {
     
     double origin = width - max.toStringAsPrecision(7).length * 6;
     drawText(canvas, Offset(origin, 20), maxVolume.toStringAsPrecision(7));
-
   }
 
   @override

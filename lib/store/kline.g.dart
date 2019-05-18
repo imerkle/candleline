@@ -134,6 +134,51 @@ mixin _$KlineStore on KlineBase, Store {
     _$volumeMaxAtom.reportChanged();
   }
 
+  final _$showAxisAtom = Atom(name: 'KlineBase.showAxis');
+
+  @override
+  bool get showAxis {
+    _$showAxisAtom.reportObserved();
+    return super.showAxis;
+  }
+
+  @override
+  set showAxis(bool value) {
+    _$showAxisAtom.context.checkIfStateModificationsAreAllowed(_$showAxisAtom);
+    super.showAxis = value;
+    _$showAxisAtom.reportChanged();
+  }
+
+  final _$xAxisAtom = Atom(name: 'KlineBase.xAxis');
+
+  @override
+  double get xAxis {
+    _$xAxisAtom.reportObserved();
+    return super.xAxis;
+  }
+
+  @override
+  set xAxis(double value) {
+    _$xAxisAtom.context.checkIfStateModificationsAreAllowed(_$xAxisAtom);
+    super.xAxis = value;
+    _$xAxisAtom.reportChanged();
+  }
+
+  final _$yAxisAtom = Atom(name: 'KlineBase.yAxis');
+
+  @override
+  double get yAxis {
+    _$yAxisAtom.reportObserved();
+    return super.yAxis;
+  }
+
+  @override
+  set yAxis(double value) {
+    _$yAxisAtom.context.checkIfStateModificationsAreAllowed(_$yAxisAtom);
+    super.yAxis = value;
+    _$yAxisAtom.reportChanged();
+  }
+
   final _$KlineBaseActionController = ActionController(name: 'KlineBase');
 
   @override
@@ -187,10 +232,30 @@ mixin _$KlineStore on KlineBase, Store {
   }
 
   @override
-  dynamic setIndexes(int f, {int t}) {
+  void setIndexes(int f, {int t}) {
     final _$actionInfo = _$KlineBaseActionController.startAction();
     try {
       return super.setIndexes(f, t: t);
+    } finally {
+      _$KlineBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void hideAxis() {
+    final _$actionInfo = _$KlineBaseActionController.startAction();
+    try {
+      return super.hideAxis();
+    } finally {
+      _$KlineBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setXY(dynamic x, dynamic y) {
+    final _$actionInfo = _$KlineBaseActionController.startAction();
+    try {
+      return super.setXY(x, y);
     } finally {
       _$KlineBaseActionController.endAction(_$actionInfo);
     }

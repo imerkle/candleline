@@ -32,6 +32,13 @@ abstract class KlineBase implements Store {
   @observable
   double volumeMax;
 
+  @observable
+  bool showAxis = false;
+  @observable
+  double xAxis = 0;
+  @observable
+  double yAxis = 0;
+
   @action
   void updateDataList(List<Market> dataList) {
       if(dataList.length > 0){
@@ -93,7 +100,7 @@ abstract class KlineBase implements Store {
   }
   
   @action
-  setIndexes(int f, {int t}){
+  void setIndexes(int f, {int t}){
     int kl = klineList.length;
     if(f > 0 && f < kl){
       this.indexFrom = f ?? this.indexFrom;
@@ -102,6 +109,18 @@ abstract class KlineBase implements Store {
       this.indexTo = t ?? this.indexTo;
     }
   }
+  
+  @action
+  void hideAxis(){
+    this.showAxis = false;
+  }
+  @action
+  void setXY(x, y){
+    this.xAxis = x;
+    this.yAxis = y;
+    this.showAxis = true;
+  }
+
   @computed
   List<Market> currentKline(){
     //print('$indexFrom, $indexTo');

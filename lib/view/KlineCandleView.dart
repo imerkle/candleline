@@ -63,10 +63,10 @@ class _CandleViewPainter extends CustomPainter {
 
     Paint rectPaint;
 
-    double right_gap = width - ( (data.length * rectWidth) - lineWidth / 2);
+    double rightGap = width - ( (data.length * rectWidth) - lineWidth / 2);
     for (int i = 0; i < data.length; i++) {
-      rectLeft = ((i * rectWidth) + lineWidth / 2) + right_gap;
-      rectRight = (((i + 1) * rectWidth) - lineWidth / 2) + right_gap;
+      rectLeft = ((i * rectWidth) + lineWidth / 2) + rightGap;
+      rectRight = (((i + 1) * rectWidth) - lineWidth / 2) + rightGap;
       if (data[i].open > data[i].close) {
         rectPaint = new Paint()
           ..color = decreaseColor

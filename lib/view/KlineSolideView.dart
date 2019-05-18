@@ -52,10 +52,11 @@ class _SolideViewPainter extends CustomPainter {
     if (min == null || max == null ) {
       return;
     }
+    double width = size.width;
     double height = size.height - 20;
 
     final double heightNormalizer = height / (max - min);
-
+    double rightGap = width - (((data.length + 0.5) * rectWidth) - lineWidth / 2);
     for (int i = 0; i < data.length; i++) {
       if (i == data.length - 1) {
         break;
@@ -69,8 +70,8 @@ class _SolideViewPainter extends CustomPainter {
       double startY;
       double endX;
       double endY;
-      startX = ((i + 0.5) * rectWidth) - lineWidth / 2;
-      endX = ((i + 1 + 0.5) * rectWidth) - lineWidth / 2;
+      startX = (((i + 0.5) * rectWidth) - lineWidth / 2) + rightGap;
+      endX = (((i + 1 + 0.5) * rectWidth) - lineWidth / 2) + rightGap;
 
       switch (type) {
         case 0:

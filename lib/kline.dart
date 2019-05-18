@@ -21,8 +21,14 @@ class KlinePage extends StatelessWidget {
       onTapCancel: (){
         isTapCancel = true;
       },
-      onLongPressStart: (_){
+      onLongPressStart: (details){
+        store.setXY(details.globalPosition.dx, details.globalPosition.dy);
         isLongPress = true;
+      },
+      onLongPressMoveUpdate: (details){
+        RenderBox getBox = context.findRenderObject();
+        var local = getBox.globalToLocal(details.globalPosition);
+        store.setXY(local.dx, local.dy);
       },
       onLongPressEnd: (_){
         isLongPress = false;
@@ -31,6 +37,7 @@ class KlinePage extends StatelessWidget {
         isTapCancel = false;
       },
       onHorizontalDragStart: (details) {
+        store.hideAxis();
         lastPoint = details.globalPosition;
         count = (width ~/ store.rectWidth).toInt();
       },
@@ -81,17 +88,25 @@ class KlinePage extends StatelessWidget {
         isTapCancel = false;
       },
       child:  Container(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  child: KlineSingleView(type: 0),
-                ),
-                flex: 20,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                color: Colors.black,
+                child: KlineSingleView(type: 0),
               ),
-            ],
-          ),
-        )
-      );
+              flex: 20,
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.black,
+                child: KlineSingleView(type: 1),
+              ),
+              flex: 4,
+            ),
+          ],
+        ),
+      )
+    );
   }
 }
