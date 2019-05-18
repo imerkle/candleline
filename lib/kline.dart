@@ -64,6 +64,7 @@ class KlinePage extends StatelessWidget {
         }
       },
       onScaleStart: (details) {
+        store.hideAxis();
         if(isLongPress){
           return;
         }
