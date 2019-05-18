@@ -23,7 +23,7 @@ class KlineSeparateView extends StatelessWidget {
           max: store.priceMax,
           min: store.priceMin,
           maxVolume: store.volumeMax,
-          lineColor: new Color.fromRGBO(255, 255, 255, 0.4),
+          lineColor: new Color.fromRGBO(255, 255, 255, 0.15),
         )
       ),
     );
@@ -85,25 +85,23 @@ class _SeparateViewPainter extends CustomPainter {
       ..color = lineColor
       ..strokeWidth = lineWidth;
 
-    //绘制横线
+    //Horizontal Line
     double heightOffset = height / 4;
+    /*
     canvas.drawLine(Offset(0, 20), Offset(width, 20), linePaint);
-    canvas.drawLine(
-        Offset(0, heightOffset + 20), Offset(width, heightOffset + 20), linePaint);
-    canvas.drawLine(Offset(0, heightOffset * 2 + 20),
-        Offset(width, heightOffset * 2 + 20), linePaint);
-    canvas.drawLine(Offset(0, heightOffset * 3 + 20),
-        Offset(width, heightOffset * 3 + 20), linePaint);
-    canvas.drawLine(
-        Offset(0, height - 1 + 20), Offset(width, height - 1 + 20), linePaint);
+    canvas.drawLine(Offset(0, heightOffset + 20), Offset(width, heightOffset + 20), linePaint);
+    canvas.drawLine(Offset(0, heightOffset * 2 + 20), Offset(width, heightOffset * 2 + 20), linePaint);
+    canvas.drawLine(Offset(0, heightOffset * 3 + 20), Offset(width, heightOffset * 3 + 20), linePaint);
+    canvas.drawLine(Offset(0, height - 1 + 20), Offset(width, height - 1 + 20), linePaint);
+    */
 
     int count = (data.length ~/ 4).toInt() + 1;
 
-    //绘制竖线
+    //Vertical Line
     for (var i = 1; i < 4; i++) {
           canvas.drawLine(Offset((i * count + 0.5) * rectWidth ,0), Offset((i * count + 0.5) * rectWidth,height + 20), linePaint);
     }
-    
+    /*
     double priceOffset = (max - min) / 4;
     double origin = width - max.toStringAsPrecision(7).length * 6;
     drawText(canvas, Offset(origin, 20), max.toStringAsPrecision(7));
@@ -111,7 +109,7 @@ class _SeparateViewPainter extends CustomPainter {
     drawText(canvas, Offset(origin, heightOffset * 2 - 12 + 20), (min + priceOffset * 2).toStringAsPrecision(7));
     drawText(canvas, Offset(origin, heightOffset * 3 - 12 + 20), (min + priceOffset).toStringAsPrecision(7));
     drawText(canvas, Offset(origin, height - 12 + 20), min.toStringAsPrecision(7));
-
+    */
   }
 
   drawVolumeLine(Canvas canvas, Size size) {

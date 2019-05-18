@@ -17,8 +17,6 @@ class KlineCandleView extends StatelessWidget {
               data: store.currentKline(),
               lineWidth: 1,
               rectWidth: store.rectWidth,
-              increaseColor: Colors.red,
-              decreaseColor: Colors.green,
               max: store.priceMax,
               min: store.priceMin
           )
@@ -35,8 +33,8 @@ class _CandleViewPainter extends CustomPainter {
     @required this.min,
     this.lineWidth = 1.0,
     this.rectWidth = 7.0,
-    this.increaseColor = Colors.red,
-    this.decreaseColor = Colors.green
+    this.increaseColor = const Color(0xFF70a800),
+    this.decreaseColor = const Color(0xFFea0070)
   });
 
   final List<Market> data;
@@ -54,7 +52,7 @@ class _CandleViewPainter extends CustomPainter {
     }
 
     double width = size.width;
-    double height = size.height - 20;
+    double height = size.height - 40;
 
     final double heightNormalizer = height / (max - min);
 
@@ -65,10 +63,10 @@ class _CandleViewPainter extends CustomPainter {
 
     Paint rectPaint;
 
+    double right_gap = width - ( (data.length * rectWidth) - lineWidth / 2);
     for (int i = 0; i < data.length; i++) {
-      rectLeft = (i * rectWidth) + lineWidth / 2;
-      rectRight = ((i + 1) * rectWidth) - lineWidth / 2;
-
+      rectLeft = ((i * rectWidth) + lineWidth / 2) + right_gap;
+      rectRight = (((i + 1) * rectWidth) - lineWidth / 2) + right_gap;
       if (data[i].open > data[i].close) {
         rectPaint = new Paint()
           ..color = decreaseColor
@@ -93,10 +91,11 @@ class _CandleViewPainter extends CustomPainter {
           new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, rectBottom),
           new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, low),
           rectPaint);
+          
       canvas.drawLine(
           new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, rectTop),
           new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, high),
-          rectPaint);
+          rectPaint); 
     }
   }
 

@@ -18,7 +18,7 @@ class KlineSingleView extends StatelessWidget {
           alignment: Alignment.center,
           fit: StackFit.expand,
           children: <Widget>[
-            //KlineSeparateView(type: 0),
+            KlineSeparateView(type: 0),
             KlineCandleView(),
             //KlineSolideView(type: 0),
             //KlineSolideView(type: 1),

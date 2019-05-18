@@ -45,7 +45,7 @@ abstract class KlineBase implements Store {
     screenWidth = width;
     double count = screenWidth / rectWidth;
     int num = count.toInt();
-    this.setIndexes(0, num);
+    this.setIndexes(0, t: num);
   }
 
   @action
@@ -93,12 +93,19 @@ abstract class KlineBase implements Store {
   }
   
   @action
-  setIndexes(int indexFrom, int indexTo){
-    this.indexFrom = indexFrom;
-    this.indexTo = indexTo ?? this.indexTo;
+  setIndexes(int f, {int t}){
+    int kl = klineList.length;
+    if(f > 0 && f < kl){
+      this.indexFrom = f ?? this.indexFrom;
+    }
+    if(t!= null && t > 0 && t <= kl){
+      this.indexTo = t ?? this.indexTo;
+    }
   }
   @computed
   List<Market> currentKline(){
-    return klineList.length > 0 ? getSubKlineList(this.indexFrom, this.indexTo) : [Market(0, 0, 0, 0, 0)];
+    //print('$indexFrom, $indexTo');
+    int kl = klineList.length;
+    return  kl > 0 ? getSubKlineList(this.indexFrom, this.indexTo) : [Market(0, 0, 0, 0, 0)];
   }
 }

@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: MyHomePage(title: 'Candleline Demo Home Page'),
+        home: MyHomePage(title: 'Candleline'),
       ),
     );
   }
@@ -77,7 +77,9 @@ class MyHomePage extends StatelessWidget {
         title: Text(title),
       ),
       body: Container(
+        color: Colors.black87,
         margin: EdgeInsets.only(top: 10, bottom: 20),
+        height: 300,
         child: KlinePage()
       )
     );

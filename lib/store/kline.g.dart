@@ -187,10 +187,10 @@ mixin _$KlineStore on KlineBase, Store {
   }
 
   @override
-  dynamic setIndexes(int indexFrom, int indexTo) {
+  dynamic setIndexes(int f, {int t}) {
     final _$actionInfo = _$KlineBaseActionController.startAction();
     try {
-      return super.setIndexes(indexFrom, indexTo);
+      return super.setIndexes(f, t: t);
     } finally {
       _$KlineBaseActionController.endAction(_$actionInfo);
     }
