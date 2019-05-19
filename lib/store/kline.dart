@@ -43,7 +43,7 @@ abstract class KlineBase implements Store {
   void updateDataList(List<Market> dataList) {
       if(dataList.length > 0){
         klineList = KlineDataCalculateManager.calculateKlineData(ChartType.MA, dataList);
-        this.calculateLimit();
+        this.calculateLimit(klineList);
       }
   }
 
@@ -55,12 +55,7 @@ abstract class KlineBase implements Store {
     this.setIndexes(0, t: num);
   }
 
-  @action
-  List<Market> getSubKlineList(int from, int to) {
-    //calculateLimit();
-    return this.klineList.sublist(from, to);
-  }
-  
+ 
   @action
   void setRectWidth(double width) {
     if (width > 25.0 || width < 2.0) {
@@ -68,13 +63,38 @@ abstract class KlineBase implements Store {
     }
     rectWidth = width;
   }  
+  
+  @action
+  void hideAxis(){
+    this.showAxis = false;
+  }
+  @action
+  void setXY(x, y){
+    this.xAxis = x;
+    this.yAxis = y;
+    this.showAxis = true;
+  }
 
   @action
-  void calculateLimit() {
+  void setIndexes(int f, {int t}){
+    int kl = klineList.length;
+    if(f > 0 && f < kl){
+      indexFrom = f ?? indexFrom;
+    }
+    if(t!= null && t > 0 && t <= kl){
+      indexTo = t ?? indexTo;
+    }
+    if(kl > 0){
+      this.calculateLimit(getSubKlineList(indexFrom, indexTo));
+    }
+  }
+  
+  @action
+  void calculateLimit(List<Market> kl) {
     double _priceMax = -double.infinity;
     double _priceMin = double.infinity;
     double _volumeMax = -double.infinity;
-    for (var i in klineList) {
+    for (var i in kl) {
       _volumeMax = max(i.vol, _volumeMax);
 
       _priceMax = max(_priceMax, i.high);
@@ -98,29 +118,10 @@ abstract class KlineBase implements Store {
     priceMin = _priceMin;
     volumeMax = _volumeMax;
   }
-  
-  @action
-  void setIndexes(int f, {int t}){
-    int kl = klineList.length;
-    if(f > 0 && f < kl){
-      this.indexFrom = f ?? this.indexFrom;
-    }
-    if(t!= null && t > 0 && t <= kl){
-      this.indexTo = t ?? this.indexTo;
-    }
-  }
-  
-  @action
-  void hideAxis(){
-    this.showAxis = false;
-  }
-  @action
-  void setXY(x, y){
-    this.xAxis = x;
-    this.yAxis = y;
-    this.showAxis = true;
-  }
-
+  @computed
+  List<Market> getSubKlineList(int from, int to) {
+    return this.klineList.sublist(from, to);
+  }  
   @computed
   List<Market> currentKline(){
     //print('$indexFrom, $indexTo');

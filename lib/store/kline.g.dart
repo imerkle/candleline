@@ -222,10 +222,20 @@ mixin _$KlineStore on KlineBase, Store {
   }
 
   @override
-  void calculateLimit() {
+  void hideAxis() {
     final _$actionInfo = _$KlineBaseActionController.startAction();
     try {
-      return super.calculateLimit();
+      return super.hideAxis();
+    } finally {
+      _$KlineBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setXY(dynamic x, dynamic y) {
+    final _$actionInfo = _$KlineBaseActionController.startAction();
+    try {
+      return super.setXY(x, y);
     } finally {
       _$KlineBaseActionController.endAction(_$actionInfo);
     }
@@ -242,20 +252,10 @@ mixin _$KlineStore on KlineBase, Store {
   }
 
   @override
-  void hideAxis() {
+  void calculateLimit(List<Market> kl) {
     final _$actionInfo = _$KlineBaseActionController.startAction();
     try {
-      return super.hideAxis();
-    } finally {
-      _$KlineBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setXY(dynamic x, dynamic y) {
-    final _$actionInfo = _$KlineBaseActionController.startAction();
-    try {
-      return super.setXY(x, y);
+      return super.calculateLimit(kl);
     } finally {
       _$KlineBaseActionController.endAction(_$actionInfo);
     }

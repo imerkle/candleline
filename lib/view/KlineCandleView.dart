@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
+final double heightGap = 20;
 class KlineCandleView extends StatelessWidget {
 
   @override
@@ -55,7 +56,6 @@ class _CandleViewPainter extends CustomPainter {
     double height = size.height - 40;
 
     final double heightNormalizer = height / (max - min);
-
     double rectLeft;
     double rectTop;
     double rectRight;
@@ -78,15 +78,15 @@ class _CandleViewPainter extends CustomPainter {
       }
 
       // Draw candlestick if decrease
-      rectTop = height - (data[i].open - min) * heightNormalizer + 20;
-      rectBottom = height - (data[i].close - min) * heightNormalizer + 20;
+      rectTop = height - (data[i].open - min) * heightNormalizer + heightGap;
+      rectBottom = height - (data[i].close - min) * heightNormalizer + heightGap;
       Rect ocRect =
       new Rect.fromLTRB(rectLeft, rectTop, rectRight, rectBottom);
       canvas.drawRect(ocRect, rectPaint);
 
       // Draw low/high candlestick wicks
-      double low = height - (data[i].low - min) * heightNormalizer + 20;
-      double high = height - (data[i].high - min) * heightNormalizer + 20;
+      double low = height - (data[i].low - min) * heightNormalizer + heightGap;
+      double high = height - (data[i].high - min) * heightNormalizer + heightGap;
       canvas.drawLine(
           new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, rectBottom),
           new Offset(rectLeft + rectWidth / 2 - lineWidth / 2, low),

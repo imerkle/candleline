@@ -18,6 +18,9 @@ class KlinePage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     store.setScreenWidth(width);
     return GestureDetector(
+      onTap: (){
+        store.hideAxis();
+      },
       onTapCancel: (){
         isTapCancel = true;
       },

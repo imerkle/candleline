@@ -15,6 +15,7 @@ dependencies:
   mobx:
   flutter_mobx:    
   provider:
+  path_drawing:
   
 dev_dependencies:
   flutter_test:

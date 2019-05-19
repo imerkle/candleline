@@ -1,9 +1,11 @@
+import 'package:candleline/view/KlineCandleView.dart' show heightGap;
 import 'package:flutter/material.dart';
 import 'package:candleline/store/kline.dart';
 import 'package:candleline/model/KlineModel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:path_drawing/path_drawing.dart';
 
 class KlineCrossView extends StatelessWidget {
   KlineCrossView({Key key, @required this.horizontal, @required this.vertical});
@@ -28,7 +30,7 @@ class KlineCrossView extends StatelessWidget {
               min: store.priceMin,
               horizontal: horizontal,
               vertical: vertical,              
-              lineColor: new Color.fromRGBO(255, 255, 255, .80),
+              lineColor: new Color.fromRGBO(255, 255, 255, .60),
           )
       ),
     );
@@ -63,8 +65,6 @@ class _CrossViewPainter extends CustomPainter {
   final bool horizontal;
   final bool vertical;
 
-  final double offsetting = 15;
-
   @override
   void paint(Canvas canvas, Size size) {
     if (!showAxis || min == null || max == null ) {
@@ -74,23 +74,48 @@ class _CrossViewPainter extends CustomPainter {
     double width = size.width;
     double height = size.height;
 
-
+    
     Paint linePaint = Paint()
       ..color = lineColor
+      ..style = PaintingStyle.stroke
       ..strokeWidth = lineWidth;
-    
+
+    CircularIntervalList dashArray = CircularIntervalList<double>(<double>[5.0, 2.5]);
     //vertical line
     if(vertical){
-      canvas.drawLine(Offset(xAxis, 0), Offset(xAxis, height), linePaint);
+      //canvas.drawLine(Offset(xAxis, 0), Offset(xAxis, height), linePaint);
+      final Path p = Path()
+        ..moveTo(xAxis, 0)
+        ..lineTo(xAxis, height);
+      canvas.drawPath(dashPath(p, dashArray: dashArray), linePaint);
     }
     
     //horizontal line
     if(horizontal){
-      double yAxisClamped = clampedDouble(yAxis, offsetting, height - offsetting);
-      canvas.drawLine(Offset(0, yAxisClamped), Offset(width, yAxisClamped), linePaint);
+      double yAxisClamped = clampedDouble(yAxis, heightGap, height - heightGap);
+      final Path p = Path()
+        ..moveTo(0, yAxisClamped)
+        ..lineTo(width, yAxisClamped);
+        canvas.drawPath(dashPath(p, dashArray: dashArray), linePaint);
+        
+      double price = max - ((max-min)*yAxisClamped/(height - heightGap));
+
+      TextPainter textPainter = new TextPainter(
+          text: new TextSpan(
+              text: price.toStringAsFixed(2),
+              style: new TextStyle(
+                color: Colors.white,
+                fontSize: 9.0,
+                fontWeight: FontWeight.normal,
+                background: Paint()..color = Colors.grey
+              )
+          ),
+          textDirection: TextDirection.ltr);
+      textPainter.layout();
+      Offset offset = Offset(width/2 > xAxis ? 0 : width-textPainter.width, yAxisClamped-textPainter.height/2);
+      textPainter.paint(canvas, offset);
     }
   }
-
   @override
   bool shouldRepaint(_CrossViewPainter old) {
     return data != null;
