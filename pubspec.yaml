@@ -1,7 +1,7 @@
 name: candleline
 description: candleline
-version: 0.1.0
-author: dengcheng
+version: 0.2.0
+author: imerkle
 homepage: 
 
 environment:
@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  rxdart: ^0.18.1
   cupertino_icons: ^0.1.2
   mobx:
   flutter_mobx:    

@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:candleline/model/KlineModel.dart';
-import 'package:candleline/store/kline.dart';
 
 enum ChartType {
   UnKnow,
