@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-import 'package:example/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:candleline/candleline.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:async' show Future;
 
 import 'package:provider/provider.dart';
+
+import 'model/model.dart';
 
 void main() => runApp(MyApp());
 

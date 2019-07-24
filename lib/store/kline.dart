@@ -10,7 +10,7 @@ part 'kline.g.dart';
 class KlineStore = KlineBase with _$KlineStore;
 
 // The store-class
-abstract class KlineBase implements Store {
+abstract class KlineBase with Store {
   @observable
   List<Market> klineList = List();
     

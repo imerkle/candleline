@@ -13,170 +13,187 @@ mixin _$KlineStore on KlineBase, Store {
 
   @override
   List<Market> get klineList {
+    _$klineListAtom.context.enforceReadPolicy(_$klineListAtom);
     _$klineListAtom.reportObserved();
     return super.klineList;
   }
 
   @override
   set klineList(List<Market> value) {
-    _$klineListAtom.context
-        .checkIfStateModificationsAreAllowed(_$klineListAtom);
-    super.klineList = value;
-    _$klineListAtom.reportChanged();
+    _$klineListAtom.context.conditionallyRunInAction(() {
+      super.klineList = value;
+      _$klineListAtom.reportChanged();
+    }, _$klineListAtom, name: '${_$klineListAtom.name}_set');
   }
 
   final _$rectWidthAtom = Atom(name: 'KlineBase.rectWidth');
 
   @override
   double get rectWidth {
+    _$rectWidthAtom.context.enforceReadPolicy(_$rectWidthAtom);
     _$rectWidthAtom.reportObserved();
     return super.rectWidth;
   }
 
   @override
   set rectWidth(double value) {
-    _$rectWidthAtom.context
-        .checkIfStateModificationsAreAllowed(_$rectWidthAtom);
-    super.rectWidth = value;
-    _$rectWidthAtom.reportChanged();
+    _$rectWidthAtom.context.conditionallyRunInAction(() {
+      super.rectWidth = value;
+      _$rectWidthAtom.reportChanged();
+    }, _$rectWidthAtom, name: '${_$rectWidthAtom.name}_set');
   }
 
   final _$screenWidthAtom = Atom(name: 'KlineBase.screenWidth');
 
   @override
   double get screenWidth {
+    _$screenWidthAtom.context.enforceReadPolicy(_$screenWidthAtom);
     _$screenWidthAtom.reportObserved();
     return super.screenWidth;
   }
 
   @override
   set screenWidth(double value) {
-    _$screenWidthAtom.context
-        .checkIfStateModificationsAreAllowed(_$screenWidthAtom);
-    super.screenWidth = value;
-    _$screenWidthAtom.reportChanged();
+    _$screenWidthAtom.context.conditionallyRunInAction(() {
+      super.screenWidth = value;
+      _$screenWidthAtom.reportChanged();
+    }, _$screenWidthAtom, name: '${_$screenWidthAtom.name}_set');
   }
 
   final _$indexFromAtom = Atom(name: 'KlineBase.indexFrom');
 
   @override
   int get indexFrom {
+    _$indexFromAtom.context.enforceReadPolicy(_$indexFromAtom);
     _$indexFromAtom.reportObserved();
     return super.indexFrom;
   }
 
   @override
   set indexFrom(int value) {
-    _$indexFromAtom.context
-        .checkIfStateModificationsAreAllowed(_$indexFromAtom);
-    super.indexFrom = value;
-    _$indexFromAtom.reportChanged();
+    _$indexFromAtom.context.conditionallyRunInAction(() {
+      super.indexFrom = value;
+      _$indexFromAtom.reportChanged();
+    }, _$indexFromAtom, name: '${_$indexFromAtom.name}_set');
   }
 
   final _$indexToAtom = Atom(name: 'KlineBase.indexTo');
 
   @override
   int get indexTo {
+    _$indexToAtom.context.enforceReadPolicy(_$indexToAtom);
     _$indexToAtom.reportObserved();
     return super.indexTo;
   }
 
   @override
   set indexTo(int value) {
-    _$indexToAtom.context.checkIfStateModificationsAreAllowed(_$indexToAtom);
-    super.indexTo = value;
-    _$indexToAtom.reportChanged();
+    _$indexToAtom.context.conditionallyRunInAction(() {
+      super.indexTo = value;
+      _$indexToAtom.reportChanged();
+    }, _$indexToAtom, name: '${_$indexToAtom.name}_set');
   }
 
   final _$priceMaxAtom = Atom(name: 'KlineBase.priceMax');
 
   @override
   double get priceMax {
+    _$priceMaxAtom.context.enforceReadPolicy(_$priceMaxAtom);
     _$priceMaxAtom.reportObserved();
     return super.priceMax;
   }
 
   @override
   set priceMax(double value) {
-    _$priceMaxAtom.context.checkIfStateModificationsAreAllowed(_$priceMaxAtom);
-    super.priceMax = value;
-    _$priceMaxAtom.reportChanged();
+    _$priceMaxAtom.context.conditionallyRunInAction(() {
+      super.priceMax = value;
+      _$priceMaxAtom.reportChanged();
+    }, _$priceMaxAtom, name: '${_$priceMaxAtom.name}_set');
   }
 
   final _$priceMinAtom = Atom(name: 'KlineBase.priceMin');
 
   @override
   double get priceMin {
+    _$priceMinAtom.context.enforceReadPolicy(_$priceMinAtom);
     _$priceMinAtom.reportObserved();
     return super.priceMin;
   }
 
   @override
   set priceMin(double value) {
-    _$priceMinAtom.context.checkIfStateModificationsAreAllowed(_$priceMinAtom);
-    super.priceMin = value;
-    _$priceMinAtom.reportChanged();
+    _$priceMinAtom.context.conditionallyRunInAction(() {
+      super.priceMin = value;
+      _$priceMinAtom.reportChanged();
+    }, _$priceMinAtom, name: '${_$priceMinAtom.name}_set');
   }
 
   final _$volumeMaxAtom = Atom(name: 'KlineBase.volumeMax');
 
   @override
   double get volumeMax {
+    _$volumeMaxAtom.context.enforceReadPolicy(_$volumeMaxAtom);
     _$volumeMaxAtom.reportObserved();
     return super.volumeMax;
   }
 
   @override
   set volumeMax(double value) {
-    _$volumeMaxAtom.context
-        .checkIfStateModificationsAreAllowed(_$volumeMaxAtom);
-    super.volumeMax = value;
-    _$volumeMaxAtom.reportChanged();
+    _$volumeMaxAtom.context.conditionallyRunInAction(() {
+      super.volumeMax = value;
+      _$volumeMaxAtom.reportChanged();
+    }, _$volumeMaxAtom, name: '${_$volumeMaxAtom.name}_set');
   }
 
   final _$showAxisAtom = Atom(name: 'KlineBase.showAxis');
 
   @override
   bool get showAxis {
+    _$showAxisAtom.context.enforceReadPolicy(_$showAxisAtom);
     _$showAxisAtom.reportObserved();
     return super.showAxis;
   }
 
   @override
   set showAxis(bool value) {
-    _$showAxisAtom.context.checkIfStateModificationsAreAllowed(_$showAxisAtom);
-    super.showAxis = value;
-    _$showAxisAtom.reportChanged();
+    _$showAxisAtom.context.conditionallyRunInAction(() {
+      super.showAxis = value;
+      _$showAxisAtom.reportChanged();
+    }, _$showAxisAtom, name: '${_$showAxisAtom.name}_set');
   }
 
   final _$xAxisAtom = Atom(name: 'KlineBase.xAxis');
 
   @override
   double get xAxis {
+    _$xAxisAtom.context.enforceReadPolicy(_$xAxisAtom);
     _$xAxisAtom.reportObserved();
     return super.xAxis;
   }
 
   @override
   set xAxis(double value) {
-    _$xAxisAtom.context.checkIfStateModificationsAreAllowed(_$xAxisAtom);
-    super.xAxis = value;
-    _$xAxisAtom.reportChanged();
+    _$xAxisAtom.context.conditionallyRunInAction(() {
+      super.xAxis = value;
+      _$xAxisAtom.reportChanged();
+    }, _$xAxisAtom, name: '${_$xAxisAtom.name}_set');
   }
 
   final _$yAxisAtom = Atom(name: 'KlineBase.yAxis');
 
   @override
   double get yAxis {
+    _$yAxisAtom.context.enforceReadPolicy(_$yAxisAtom);
     _$yAxisAtom.reportObserved();
     return super.yAxis;
   }
 
   @override
   set yAxis(double value) {
-    _$yAxisAtom.context.checkIfStateModificationsAreAllowed(_$yAxisAtom);
-    super.yAxis = value;
-    _$yAxisAtom.reportChanged();
+    _$yAxisAtom.context.conditionallyRunInAction(() {
+      super.yAxis = value;
+      _$yAxisAtom.reportChanged();
+    }, _$yAxisAtom, name: '${_$yAxisAtom.name}_set');
   }
 
   final _$KlineBaseActionController = ActionController(name: 'KlineBase');
@@ -196,16 +213,6 @@ mixin _$KlineStore on KlineBase, Store {
     final _$actionInfo = _$KlineBaseActionController.startAction();
     try {
       return super.setScreenWidth(width);
-    } finally {
-      _$KlineBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  List<Market> getSubKlineList(int from, int to) {
-    final _$actionInfo = _$KlineBaseActionController.startAction();
-    try {
-      return super.getSubKlineList(from, to);
     } finally {
       _$KlineBaseActionController.endAction(_$actionInfo);
     }
